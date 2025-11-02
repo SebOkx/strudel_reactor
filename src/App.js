@@ -58,9 +58,9 @@ export function Proc() {
 export function ProcessText(match, ...args) {
 
     let replace = ""
-    if (document.getElementById('flexRadioDefault2').checked) {
-        replace = "_"
-    }
+    //if (document.getElementById('flexRadioDefault2').checked) {
+      //  replace = "_"
+    //}
 
     return replace
 }
@@ -110,8 +110,10 @@ useEffect(() => {
 }, []);
 
 
-return (
-    <div>
+    return (
+    <div className="bg-info">
+       
+
         <h2>Strudel Demo</h2>
         <main>
 
