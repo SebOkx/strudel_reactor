@@ -13,6 +13,8 @@ import DJControls from './components/DJControls';
 import PlayButtons from './components/PlayButtons';
 import ProcButtons from './components/ProcButtonst';
 import PreprocessArea from './components/PreprocessArea';
+import { useState } from 'react';
+
 
 let globalEditor = null;
 
@@ -67,15 +69,24 @@ export function ProcessText(match, ...args) {
 
 export default function StrudelDemo() {
 
-const hasRun = useRef(false);
+    const hasRun = useRef(false);
 
-useEffect(() => {
+    const handlePlay = () => {
+        globalEditor.evaluate();
 
-    if (!hasRun.current) {
-        document.addEventListener("d3Data", handleD3Data);
-        console_monkey_patch();
-        hasRun.current = true;
-        //Code copied from example: https://codeberg.org/uzu/strudel/src/branch/main/examples/codemirror-repl
+    }
+    const handleStop = () => {
+        globalEditor.stop();
+    }
+    const [songText, setSongText] = useState(stranger_tune)
+
+    useEffect(() => {
+
+        if (!hasRun.current) {
+            document.addEventListener("d3Data", handleD3Data);
+            console_monkey_patch();
+            hasRun.current = true;
+            //Code copied from example: https://codeberg.org/uzu/strudel/src/branch/main/examples/codemirror-repl
             //init canvas
             const canvas = document.getElementById('roll');
             canvas.width = canvas.width * 2;
@@ -101,51 +112,49 @@ useEffect(() => {
                     await Promise.all([loadModules, registerSynthSounds(), registerSoundfonts()]);
                 },
             });
-            
-        document.getElementById('proc').value = stranger_tune
-        SetupButtons()
-        Proc()
-    }
-
-}, []);
+            document.getElementById('proc').value = stranger_tune
+            //SetupButtons()
+            //Proc()
+        }
+        globalEditor.setCode(songText);
+    }, [songText]);
 
 
     return (
-    <div className="bg-info">
-       
 
-        <h2>Strudel Demo</h2>
-        <main>
+        <div>
 
-            <div className="container-fluid">
-                <div className="row">
-                    <div className="col-md-8" style={{ maxHeight: '50vh', overflowY: 'auto' }}>
-                        <PreprocessArea />
-                    </div>
-                    <div className="col-md-4">
 
-                        <nav>
-                            <ProcButtons />
-                            <br />
-                            <PlayButtons />
-                        </nav>
+            <h2>Strudel Demo</h2>
+            <main>
+
+                <div className="container-fluid">
+                    <div className="row">
+                        <div className="col-md-8" style={{ maxHeight: '50vh', overflowY: 'auto' }}>
+                            <PreprocessArea defaultValue={songText} onChange={(e)=>setSongText(e.target.value)} />
+                        </div>
+                        <div className="col-md-4">
+
+                            <nav>
+                                <ProcButtons />
+                                <br />
+                                <PlayButtons onPlay={handlePlay} onStop={handleStop} />
+                            </nav>
+                        </div>
                     </div>
-                </div>
-                <div className="row">
-                    <div className="col-md-8" style={{ maxHeight: '50vh', overflowY: 'auto' }}>
-                        <div id="editor" />
-                        <div id="output" />
-                    </div>
-                    <div className="col-md-4">
-                        <DJControls />
+                    <div className="row">
+                        <div className="col-md-8" style={{ maxHeight: '50vh', overflowY: 'auto' }}>
+                            <div id="editor" />
+                            <div id="output" />
+                        </div>
+                        <div className="col-md-4">
+                            <DJControls />
                         </div>
                     </div>
                 </div>
-            <canvas id="roll"></canvas>
-        </main >
-    </div >
-    
-);
+                <canvas id="roll"></canvas>
+            </main >
+        </div >
 
-
+    );
 }
