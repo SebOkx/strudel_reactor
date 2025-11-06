@@ -11,9 +11,10 @@ import { stranger_tune } from './tunes';
 import console_monkey_patch, { getD3Data } from './console-monkey-patch';
 import DJControls from './components/DJControls';
 import PlayButtons from './components/PlayButtons';
-import ProcButtons from './components/ProcButtonst';
+import ProcButtons from './components/ProcButtons';
 import PreprocessArea from './components/PreprocessArea';
 import { useState } from 'react';
+import { Preprocess } from './utils/PreprocessLogic';
 
 
 let globalEditor = null;
@@ -72,13 +73,29 @@ export default function StrudelDemo() {
     const hasRun = useRef(false);
 
     const handlePlay = () => {
+
+        let outputText = Preprocess({ inputText: procText, volume: volume })
+        globalEditor.setCode(outputText)
         globalEditor.evaluate();
 
     }
     const handleStop = () => {
         globalEditor.stop();
     }
-    const [songText, setSongText] = useState(stranger_tune)
+
+    
+    const [procText, setProcText] = useState(stranger_tune)
+
+    const [volume, setVolume] = useState(1);
+
+    const [state, setState] = useState("stop");
+
+    useEffect(() => {
+        if (state === "play") {
+            handlePlay();
+        }
+        
+    },[volume])
 
     useEffect(() => {
 
@@ -116,45 +133,40 @@ export default function StrudelDemo() {
             //SetupButtons()
             //Proc()
         }
-        globalEditor.setCode(songText);
-    }, [songText]);
+        globalEditor.setCode(procText);
+    }, [procText]);
 
 
     return (
-
-        <div>
-
-
-            <h2>Strudel Demo</h2>
+        <div style={{ background: 'linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%)', minHeight: '100vh', padding: '32px' }}>
+            <h2 style={{ textAlign: 'center', marginBottom: '24px', fontWeight: 700, letterSpacing: '1px', color: '#3730a3' }}>Strudel Demo</h2>
             <main>
-
-                <div className="container-fluid">
-                    <div className="row">
-                        <div className="col-md-8" style={{ maxHeight: '50vh', overflowY: 'auto' }}>
-                            <PreprocessArea defaultValue={songText} onChange={(e)=>setSongText(e.target.value)} />
+                <div className="container-fluid" style={{ borderRadius: '16px', boxShadow: '0 4px 24px rgba(55,48,163,0.08)', background: '#fff', padding: '24px' }}>
+                    <div className="row" style={{ marginBottom: '16px' }}>
+                        <div className="col-md-8" style={{ maxHeight: '50vh', overflowY: 'auto', paddingRight: '16px' }}>
+                            <PreprocessArea defaultValue={procText} onChange={(e) => setProcText(e.target.value)} />
                         </div>
-                        <div className="col-md-4">
-
-                            <nav>
-                                <ProcButtons />
+                        <div className="col-md-4" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                            <nav style={{ width: '100%' }}>
+                                <ProcButtons onProc={() => { }}
+                                    onProcPlay={() => { setState("play"); handlePlay() }} />
                                 <br />
-                                <PlayButtons onPlay={handlePlay} onStop={handleStop} />
+                                <PlayButtons onPlay={() => { setState("play"); handlePlay() }} onStop={() => { setState("stop"); handleStop(); }} />
                             </nav>
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-md-8" style={{ maxHeight: '50vh', overflowY: 'auto' }}>
-                            <div id="editor" />
-                            <div id="output" />
+                        <div className="col-md-8" style={{ maxHeight: '50vh', overflowY: 'auto', paddingRight: '16px' }}>
+                            <div id="editor" style={{ borderRadius: '8px', boxShadow: '0 2px 8px rgba(55,48,163,0.04)', marginBottom: '12px', background: '#f3f4f6' }} />
+                            <div id="output" style={{ borderRadius: '8px', background: '#f3f4f6', minHeight: '40px', marginBottom: '12px' }} />
                         </div>
-                        <div className="col-md-4">
-                            <DJControls />
+                        <div className="col-md-4" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <DJControls volumeChange={volume} onVolumeChange={(e) => setVolume(e.target.value)} />
                         </div>
                     </div>
                 </div>
-                <canvas id="roll"></canvas>
+                <canvas id="roll" style={{ display: 'block', margin: '32px auto 0', borderRadius: '12px', boxShadow: '0 2px 12px rgba(55,48,163,0.08)', background: '#eef2ff', width: '100%', maxWidth: '900px', height: '200px' }}></canvas>
             </main >
         </div >
-
     );
 }

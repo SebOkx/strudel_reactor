@@ -1,14 +1,13 @@
-function DJControls() { //Component dedicated to composing music.
+function DJControls({ volume, onVolumeChange }) {
     return (
         <>
             <div className="input-group mb-3">
-                <span class="input-group-text" id="bpm-label">BPM</span>
-                <input type="number" class="form-control" aria-label="BPM" aria-describedby="bpm-label" min="60" max="200" value="120" />
-                
+                <span className="input-group-text" id="bpm-label">BPM</span>
+                <input type="number" className="form-control" aria-label="BPM" aria-describedby="bpm-label" min="60" max="200" />
             </div>
 
-            <label htmlFor="volumeRange" class="form-label">Volume</label >
-            <input type="range" class="form-range" min="0" max="100" id="volumeRange" value="50" />
+            <label htmlFor="volumeRange" className="form-label">Volume</label>
+            <input type="range" className="form-range" min="0" max="2" step="0.1" onMouseUp={onVolumeChange} id="volume_range" />
 
             <div className="form-check-input" type="checkbox" value="" id="s1" />
             <label className="form-check-label" htmlFor="s1">
