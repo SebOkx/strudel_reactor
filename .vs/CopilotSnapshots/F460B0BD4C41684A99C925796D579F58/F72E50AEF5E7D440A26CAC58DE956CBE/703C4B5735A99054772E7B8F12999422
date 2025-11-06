@@ -14,7 +14,7 @@ import PlayButtons from './components/PlayButtons';
 import ProcButtons from './components/ProcButtons';
 import PreprocessArea from './components/PreprocessArea';
 import { Preprocess } from './utils/PreprocessLogic';
-
+import Midipad from './components/Midipad';
 
 let globalEditor = null;
 
@@ -72,8 +72,11 @@ export default function StrudelDemo() {
     const hasRun = useRef(false);
 
     const [procText, setProcText] = useState(stranger_tune)
+
     const [volume, setVolume] = useState(1);
-    const [cpm, setCpm] = useState(140); // Default CPM from stranger_tune
+
+    const [cpm, setCpm] = useState(140); 
+
     const [state, setState] = useState("stop");
 
     const handlePlay = () => {
@@ -99,6 +102,7 @@ export default function StrudelDemo() {
             hasRun.current = true;
             //Code copied from example: https://codeberg.org/uzu/strudel/src/branch/main/examples/codemirror-repl
             //init canvas
+
             const canvas = document.getElementById('roll');
             canvas.width = canvas.width * 2;
             canvas.height = canvas.height * 2;
@@ -148,6 +152,7 @@ export default function StrudelDemo() {
                                 <br />
                                 <PlayButtons onPlay={() => { setState("play"); handlePlay() }} onStop={() => { setState("stop"); handleStop(); }} />
                             </nav>
+                            <Midipad />
                         </div>
                     </div>
                     <div className="row">

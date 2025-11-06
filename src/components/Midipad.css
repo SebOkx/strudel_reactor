@@ -1,0 +1,32 @@
+.midipad-container {
+    padding: 16px;
+    background: #f3f4f6;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(55,48,163,0.04);
+    margin-bottom: 16px;
+}
+.midipad-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.midipad-row {
+    display: flex;
+    gap: 8px;
+}
+.midipad-pad {
+    width: 48px;
+    height: 48px;
+    background: #c7d2fe;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #3730a3;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.midipad-pad:hover {
+    background: #818cf8;
+    color: #fff;
+}

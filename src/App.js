@@ -14,7 +14,7 @@ import PlayButtons from './components/PlayButtons';
 import ProcButtons from './components/ProcButtons';
 import PreprocessArea from './components/PreprocessArea';
 import { Preprocess } from './utils/PreprocessLogic';
-
+import Midipad from './components/Midipad';
 
 let globalEditor = null;
 
@@ -152,6 +152,7 @@ export default function StrudelDemo() {
                                 <br />
                                 <PlayButtons onPlay={() => { setState("play"); handlePlay() }} onStop={() => { setState("stop"); handleStop(); }} />
                             </nav>
+                            <Midipad />
                         </div>
                     </div>
                     <div className="row">
