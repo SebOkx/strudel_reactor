@@ -1,8 +1,5 @@
-export function Preprocess({ inputText, volume, cpm }) {
-
+﻿export function Preprocess({ inputText, volume }) {
     let outputText = inputText;
-
-    outputText = outputText.replace(/setcps\((\d+)(\/\d+\/\d+)?\)/, (match, p1, rest) => `setcps(${cpm}${rest || ''})`);
 
     outputText += `\n//all(x => x.gain(${volume}))`
 
@@ -20,7 +17,9 @@ export function Preprocess({ inputText, volume, cpm }) {
         }
 
         m.forEach((match, groupIndex) => {
+
             matches.push(match)
+
         });
     }
 
@@ -35,7 +34,9 @@ export function Preprocess({ inputText, volume, cpm }) {
         outputText);
 
     console.log(matches3)
+
     return matches3;
 
 
+ 
 }

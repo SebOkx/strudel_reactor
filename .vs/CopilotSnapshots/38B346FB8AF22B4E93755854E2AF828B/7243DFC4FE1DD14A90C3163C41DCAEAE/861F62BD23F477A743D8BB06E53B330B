@@ -1,4 +1,4 @@
-import './App.css';
+﻿import './App.css';
 import { useEffect, useRef, useState } from "react";
 import { StrudelMirror } from '@strudel/codemirror';
 import { evalScope } from '@strudel/core';
@@ -72,11 +72,8 @@ export default function StrudelDemo() {
     const hasRun = useRef(false);
 
     const [procText, setProcText] = useState(stranger_tune)
-
     const [volume, setVolume] = useState(1);
-
-    const [cpm, setCpm] = useState(140); 
-
+    const [cpm, setCpm] = useState(140); // Default CPM from stranger_tune
     const [state, setState] = useState("stop");
 
     const handlePlay = () => {
@@ -102,7 +99,6 @@ export default function StrudelDemo() {
             hasRun.current = true;
             //Code copied from example: https://codeberg.org/uzu/strudel/src/branch/main/examples/codemirror-repl
             //init canvas
-
             const canvas = document.getElementById('roll');
             canvas.width = canvas.width * 2;
             canvas.height = canvas.height * 2;

@@ -1,4 +1,4 @@
-import './App.css';
+﻿import './App.css';
 import { useEffect, useRef, useState } from "react";
 import { StrudelMirror } from '@strudel/codemirror';
 import { evalScope } from '@strudel/core';
@@ -71,28 +71,30 @@ export default function StrudelDemo() {
 
     const hasRun = useRef(false);
 
-    const [procText, setProcText] = useState(stranger_tune)
-
-    const [volume, setVolume] = useState(1);
-
-    const [cpm, setCpm] = useState(140); 
-
-    const [state, setState] = useState("stop");
-
     const handlePlay = () => {
-        let outputText = Preprocess({ inputText: procText, volume: volume, cpm: cpm })
+
+        let outputText = Preprocess({ inputText: procText, volume: volume })
         globalEditor.setCode(outputText)
         globalEditor.evaluate();
+
     }
     const handleStop = () => {
         globalEditor.stop();
     }
 
+    
+    const [procText, setProcText] = useState(stranger_tune)
+
+    const [volume, setVolume] = useState(1);
+
+    const [state, setState] = useState("stop");
+
     useEffect(() => {
         if (state === "play") {
             handlePlay();
         }
-    }, [volume, cpm])
+        
+    },[volume])
 
     useEffect(() => {
 
@@ -102,7 +104,6 @@ export default function StrudelDemo() {
             hasRun.current = true;
             //Code copied from example: https://codeberg.org/uzu/strudel/src/branch/main/examples/codemirror-repl
             //init canvas
-
             const canvas = document.getElementById('roll');
             canvas.width = canvas.width * 2;
             canvas.height = canvas.height * 2;
@@ -160,12 +161,7 @@ export default function StrudelDemo() {
                             <div id="output" style={{ borderRadius: '8px', background: '#f3f4f6', minHeight: '40px', marginBottom: '12px' }} />
                         </div>
                         <div className="col-md-4" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            <DJControls
-                                volume={volume}
-                                onVolumeChange={(e) => setVolume(Number(e.target.value))}
-                                cpm={cpm}
-                                onCpmChange={(e) => setCpm(Number(e.target.value))}
-                            />
+                            <DJControls volumeChange={volume} onVolumeChange={(e) => setVolume(e.target.value)} />
                         </div>
                     </div>
                 </div>
