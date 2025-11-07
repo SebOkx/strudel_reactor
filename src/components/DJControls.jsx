@@ -1,4 +1,4 @@
-function DJControls({ volume, onVolumeChange, cpm, onCpmChange }) {
+function DJControls({ volume, onVolumeChange, cpm, onCpmChange, lpf, onLpfChange }) {
     return (
         <>
             <div className="input-group mb-3">
@@ -10,20 +10,10 @@ function DJControls({ volume, onVolumeChange, cpm, onCpmChange }) {
             <label htmlFor="volumeRange" className="form-label">Volume</label>
             <input type="range" className="form-range" min="0" max="2" step="0.1" value={volume} onChange={onVolumeChange} id="volume_range" />
 
-            <div className="form-check-input" type="checkbox" value="" id="s1" />
-            <label className="form-check-label" htmlFor="s1">
-                s1
-            </label>
+           
+            <label htmlFor="lpfRange" className="form-label">LPF</label>
+            <input type="range" className="form-range" min="0" max="30" step="0.1" value={lpf} onChange={onLpfChange} id="lpf_range" />
 
-            <div className="form-check-input" type="checkbox" value="" id="d1" />
-            <label className="form-check-label" htmlFor="d1">
-                d1
-            </label>
-
-            <div className="form-check-input" type="checkbox" value="" id="d2" />
-            <label className="form-check-label" htmlFor="d2">
-                d2
-            </label>
 
         </>
   );

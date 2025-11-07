@@ -15,8 +15,12 @@ import ProcButtons from './components/ProcButtons';
 import PreprocessArea from './components/PreprocessArea';
 import { Preprocess } from './utils/PreprocessLogic';
 import Midipad from './components/Midipad';
+import NotesDisplay from './components/NotesDisplay';
+
 
 let globalEditor = null;
+
+
 
 const handleD3Data = (event) => {
     console.log(event.detail);
@@ -38,8 +42,6 @@ export function SetupButtons() {
     }
     )
 }
-
-
 
 export function ProcAndPlay() {
     if (globalEditor != null && globalEditor.repl.state.started == true) {
@@ -69,6 +71,26 @@ export function ProcessText(match, ...args) {
 
 export default function StrudelDemo() {
 
+    document.addEventListener('keydown', function (event) { //Press space to start/stop
+        if (event.code === 'Space') {
+            event.preventDefault();
+            if (globalEditor != null) {
+   
+                    globalEditor.evaluate();
+                }
+            }
+        }
+    );
+
+
+    
+
+    const [layers, setLayers] = useState([ //This is just sample data
+        { name: 'Piano', notes: ['C', 'D', 'E', 'F', 'G'] },
+        { name: 'Drums', notes: ['Kick', 'Snare', 'Hat'] },
+        { name: 'Bass', notes: ['C1', 'D1', 'E1', 'F1'] },
+    ])
+
     const hasRun = useRef(false);
 
     const [procText, setProcText] = useState(stranger_tune)
@@ -79,8 +101,11 @@ export default function StrudelDemo() {
 
     const [state, setState] = useState("stop");
 
+    const [lpf, setLpf] = useState(1000); 
+
+
     const handlePlay = () => {
-        let outputText = Preprocess({ inputText: procText, volume: volume, cpm: cpm })
+        let outputText = Preprocess({ inputText: procText, volume: volume, cpm: cpm, lpf: lpf })
         globalEditor.setCode(outputText)
         globalEditor.evaluate();
     }
@@ -88,11 +113,14 @@ export default function StrudelDemo() {
         globalEditor.stop();
     }
 
+
+    
+
     useEffect(() => {
         if (state === "play") {
             handlePlay();
         }
-    }, [volume, cpm])
+    }, [volume, cpm, lpf])
 
     useEffect(() => {
 
@@ -137,10 +165,10 @@ export default function StrudelDemo() {
 
 
     return (
-        <div style={{ background: 'linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%)', minHeight: '100vh', padding: '32px' }}>
-            <h2 style={{ textAlign: 'center', marginBottom: '24px', fontWeight: 700, letterSpacing: '1px', color: '#3730a3' }}>Strudel Demo</h2>
+        <div style={{ background: 'linear-gradient(135deg, #ce7e00 0%, #f1c232 100%)', minHeight: '100vh', padding: '32px' }}>
+            <h1 style={{ textAlign: 'center', marginBottom: '24px', fontWeight: 900, letterSpacing: '1px', color: '#3730a3' }}>Strudel</h1>
             <main>
-                <div className="container-fluid" style={{ borderRadius: '16px', boxShadow: '0 4px 24px rgba(55,48,163,0.08)', background: '#fff', padding: '24px' }}>
+                <div className="container-fluid" style={{ borderRadius: '16px', boxShadow: '0 4px 24px rgba(55,48,163,0.08)', background: '#b45f06', padding: '24px' }}>
                     <div className="row" style={{ marginBottom: '16px' }}>
                         <div className="col-md-8" style={{ maxHeight: '50vh', overflowY: 'auto', paddingRight: '16px' }}>
                             <PreprocessArea defaultValue={procText} onChange={(e) => setProcText(e.target.value)} />
@@ -153,6 +181,9 @@ export default function StrudelDemo() {
                                 <PlayButtons onPlay={() => { setState("play"); handlePlay() }} onStop={() => { setState("stop"); handleStop(); }} />
                             </nav>
                             <Midipad />
+                            <h1>Music Sequence</h1>
+                           
+                            {/* <NotesDisplay layers={layers} /> */}
                         </div>
                     </div>
                     <div className="row">
@@ -166,11 +197,14 @@ export default function StrudelDemo() {
                                 onVolumeChange={(e) => setVolume(Number(e.target.value))}
                                 cpm={cpm}
                                 onCpmChange={(e) => setCpm(Number(e.target.value))}
+                                lpf={lpf}
+                                onLpfChange={(e) => setLpf(Number(e.target.value))}
+                                
                             />
                         </div>
                     </div>
                 </div>
-                <canvas id="roll" style={{ display: 'block', margin: '32px auto 0', borderRadius: '12px', boxShadow: '0 2px 12px rgba(55,48,163,0.08)', background: '#eef2ff', width: '100%', maxWidth: '900px', height: '200px' }}></canvas>
+                <canvas id="roll" style={{ display: 'block', margin: '32px auto 0', borderRadius: '12px', boxShadow: '0 2px 12px rgba(55,48,163,0.08)', background: '#00000', width: '100%', maxWidth: '900px', height: '200px' }}></canvas>
             </main >
         </div >
     );

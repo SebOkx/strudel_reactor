@@ -3,8 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\asus\\Desktop\\UNI_FILES\\Web Technology\\StrudelApp\\strudel_reactor\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|c:\\users\\asus\\desktop\\uni_files\\web technology\\strudelapp\\strudel_reactor\\src\\tunes.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|solutionrelative:src\\tunes.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|c:\\users\\asus\\desktop\\uni_files\\web technology\\strudelapp\\strudel_reactor\\src\\components\\djcontrols.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|solutionrelative:src\\components\\djcontrols.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|c:\\users\\asus\\desktop\\uni_files\\web technology\\strudelapp\\strudel_reactor\\src\\app.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|solutionrelative:src\\app.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\asus\\Desktop\\UNI_FILES\\Web Technology\\StrudelApp\\strudel_reactor\\src\\utils\\PreprocessLogic.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
@@ -19,16 +27,16 @@
       "RelativeMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|solutionrelative:src\\components\\playbuttons.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|c:\\users\\asus\\desktop\\uni_files\\web technology\\strudelapp\\strudel_reactor\\src\\app.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|solutionrelative:src\\app.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|c:\\users\\asus\\desktop\\uni_files\\web technology\\strudelapp\\strudel_reactor\\src\\components\\procbuttons.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|solutionrelative:src\\components\\procbuttons.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|c:\\users\\asus\\desktop\\uni_files\\web technology\\strudelapp\\strudel_reactor\\src\\tunes.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|solutionrelative:src\\tunes.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|c:\\users\\asus\\desktop\\uni_files\\web technology\\strudelapp\\strudel_reactor\\src\\components\\midipad.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}|",
+      "RelativeMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|solutionrelative:src\\components\\midipad.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|c:\\users\\asus\\desktop\\uni_files\\web technology\\strudelapp\\strudel_reactor\\src\\components\\midipad.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|solutionrelative:src\\components\\midipad.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -37,8 +45,8 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 280,
-          "SelectedChildIndex": 3,
+          "DockedWidth": 208,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -54,59 +62,59 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "DJControls.jsx",
               "DocumentMoniker": "C:\\Users\\asus\\Desktop\\UNI_FILES\\Web Technology\\StrudelApp\\strudel_reactor\\src\\components\\DJControls.jsx",
               "RelativeDocumentMoniker": "src\\components\\DJControls.jsx",
               "ToolTip": "C:\\Users\\asus\\Desktop\\UNI_FILES\\Web Technology\\StrudelApp\\strudel_reactor\\src\\components\\DJControls.jsx",
               "RelativeToolTip": "src\\components\\DJControls.jsx",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwBUAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
               "WhenOpened": "2025-11-02T16:36:24.629Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 0,
               "Title": "tunes.js",
               "DocumentMoniker": "C:\\Users\\asus\\Desktop\\UNI_FILES\\Web Technology\\StrudelApp\\strudel_reactor\\src\\tunes.js",
               "RelativeDocumentMoniker": "src\\tunes.js",
               "ToolTip": "C:\\Users\\asus\\Desktop\\UNI_FILES\\Web Technology\\StrudelApp\\strudel_reactor\\src\\tunes.js",
               "RelativeToolTip": "src\\tunes.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAF8AAAATAAAAAAAAAA==",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAABcAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
               "WhenOpened": "2025-11-06T16:30:31.131Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 2,
               "Title": "App.js",
               "DocumentMoniker": "C:\\Users\\asus\\Desktop\\UNI_FILES\\Web Technology\\StrudelApp\\strudel_reactor\\src\\App.js",
               "RelativeDocumentMoniker": "src\\App.js",
               "ToolTip": "C:\\Users\\asus\\Desktop\\UNI_FILES\\Web Technology\\StrudelApp\\strudel_reactor\\src\\App.js",
               "RelativeToolTip": "src\\App.js",
-              "ViewState": "AgIAAJIAAAAAAAAAAAAiwKQAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAJkAAAAAAAAAAAAgwFQAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
               "WhenOpened": "2025-11-02T15:32:50.585Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "PreprocessLogic.jsx",
               "DocumentMoniker": "C:\\Users\\asus\\Desktop\\UNI_FILES\\Web Technology\\StrudelApp\\strudel_reactor\\src\\utils\\PreprocessLogic.jsx",
               "RelativeDocumentMoniker": "src\\utils\\PreprocessLogic.jsx",
               "ToolTip": "C:\\Users\\asus\\Desktop\\UNI_FILES\\Web Technology\\StrudelApp\\strudel_reactor\\src\\utils\\PreprocessLogic.jsx",
               "RelativeToolTip": "src\\utils\\PreprocessLogic.jsx",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwB4AAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
               "WhenOpened": "2025-11-06T14:17:20.698Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "PreprocessArea.jsx",
               "DocumentMoniker": "C:\\Users\\asus\\Desktop\\UNI_FILES\\Web Technology\\StrudelApp\\strudel_reactor\\src\\components\\PreprocessArea.jsx",
               "RelativeDocumentMoniker": "src\\components\\PreprocessArea.jsx",
@@ -119,7 +127,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "PlayButtons.jsx",
               "DocumentMoniker": "C:\\Users\\asus\\Desktop\\UNI_FILES\\Web Technology\\StrudelApp\\strudel_reactor\\src\\components\\PlayButtons.jsx",
               "RelativeDocumentMoniker": "src\\components\\PlayButtons.jsx",
@@ -132,7 +140,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "ProcButtons.jsx",
               "DocumentMoniker": "C:\\Users\\asus\\Desktop\\UNI_FILES\\Web Technology\\StrudelApp\\strudel_reactor\\src\\components\\ProcButtons.jsx",
               "RelativeDocumentMoniker": "src\\components\\ProcButtons.jsx",
@@ -146,9 +154,35 @@
           ]
         },
         {
-          "DockedWidth": 120,
-          "SelectedChildIndex": -1,
+          "DockedWidth": 192,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Midipad.css",
+              "DocumentMoniker": "C:\\Users\\asus\\Desktop\\UNI_FILES\\Web Technology\\StrudelApp\\strudel_reactor\\src\\components\\Midipad.css",
+              "RelativeDocumentMoniker": "src\\components\\Midipad.css",
+              "ToolTip": "C:\\Users\\asus\\Desktop\\UNI_FILES\\Web Technology\\StrudelApp\\strudel_reactor\\src\\components\\Midipad.css",
+              "RelativeToolTip": "src\\components\\Midipad.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-11-06T17:59:06.911Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Midipad.jsx",
+              "DocumentMoniker": "C:\\Users\\asus\\Desktop\\UNI_FILES\\Web Technology\\StrudelApp\\strudel_reactor\\src\\components\\Midipad.jsx",
+              "RelativeDocumentMoniker": "src\\components\\Midipad.jsx",
+              "ToolTip": "C:\\Users\\asus\\Desktop\\UNI_FILES\\Web Technology\\StrudelApp\\strudel_reactor\\src\\components\\Midipad.jsx",
+              "RelativeToolTip": "src\\components\\Midipad.jsx",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2025-11-06T17:59:06.839Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
