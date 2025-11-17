@@ -1,196 +1,200 @@
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import './App.css';
-import { useEffect, useRef, useState } from "react";
 import { StrudelMirror } from '@strudel/codemirror';
 import { evalScope } from '@strudel/core';
 import { drawPianoroll } from '@strudel/draw';
-import { initAudioOnFirstClick } from '@strudel/webaudio';
+import { initAudioOnFirstClick, getAudioContext, webaudioOutput, registerSynthSounds } from '@strudel/webaudio';
 import { transpiler } from '@strudel/transpiler';
-import { getAudioContext, webaudioOutput, registerSynthSounds } from '@strudel/webaudio';
 import { registerSoundfonts } from '@strudel/soundfonts';
-import { stranger_tune } from './tunes';
+import { stranger_tune } from './music/stranger_things_song';
 import console_monkey_patch, { getD3Data } from './console-monkey-patch';
 import DJControls from './components/DJControls';
 import PlayButtons from './components/PlayButtons';
 import ProcButtons from './components/ProcButtons';
 import PreprocessArea from './components/PreprocessArea';
 import { Preprocess } from './utils/PreprocessLogic';
-import Midipad from './components/Midipad';
-import NotesDisplay from './components/NotesDisplay';
 
+//a custom hook that encapsulates all Strudel/editor lifecycle and provides an API
+function useStrudelEditor({ editorRootRef, canvasRef, defaultCode }) {
+    const instanceRef = useRef(null);
+    const hasBakedRef = useRef(false);
 
-let globalEditor = null;
+    const setCode = useCallback((code) => {
+        if (instanceRef.current) instanceRef.current.setCode(code);
+    }, []);
 
+    const evaluate = useCallback(() => {
+        if (instanceRef.current) instanceRef.current.evaluate();
+    }, []);
 
+    const stop = useCallback(() => {
+        if (instanceRef.current) instanceRef.current.stop();
+    }, []);
 
-const handleD3Data = (event) => {
-    console.log(event.detail);
-};
+    useEffect(() => {
+        if (!editorRootRef.current || !canvasRef.current) return;
 
-export function SetupButtons() {
+        //only initialize once
+        if (instanceRef.current) return;
 
-    document.getElementById('play').addEventListener('click', () => globalEditor.evaluate());
-    document.getElementById('stop').addEventListener('click', () => globalEditor.stop());
-    document.getElementById('process').addEventListener('click', () => {
-        Proc()
-    }
-    )
-    document.getElementById('process_play').addEventListener('click', () => {
-        if (globalEditor != null) {
-            Proc()
-            globalEditor.evaluate()
-        }
-    }
-    )
-}
+        const canvas = canvasRef.current;
+        //scale for high dpi
+        canvas.width = canvas.width * 2;
+        canvas.height = canvas.height * 2;
+        const ctx = canvas.getContext('2d');
+        const drawTime = [-2, 2];
 
-export function ProcAndPlay() {
-    if (globalEditor != null && globalEditor.repl.state.started == true) {
-        console.log(globalEditor)
-        Proc()
-        globalEditor.evaluate();
-    }
-}
+        instanceRef.current = new StrudelMirror({
+            defaultOutput: webaudioOutput,
+            getTime: () => getAudioContext().currentTime,
+            transpiler,
+            root: editorRootRef.current,
+            drawTime,
+            onDraw: (haps, time) => drawPianoroll({ haps, time, ctx, drawTime, fold: 0 }),
+            prebake: async () => {
+                //this runs before evaluation, only need to load once
+                if (hasBakedRef.current) return;
+                initAudioOnFirstClick();
+                const loadModules = evalScope(
+                    import('@strudel/core'),
+                    import('@strudel/draw'),
+                    import('@strudel/mini'),
+                    import('@strudel/tonal'),
+                    import('@strudel/webaudio'),
+                );
+                await Promise.all([loadModules, registerSynthSounds(), registerSoundfonts()]);
+                hasBakedRef.current = true;
+            },
+        });
 
-export function Proc() {
+        //ensure the editor starts with code
+        instanceRef.current.setCode(defaultCode);
 
-    let proc_text = document.getElementById('proc').value
-    let proc_text_replaced = proc_text.replaceAll('<p1_Radio>', ProcessText);
-    ProcessText(proc_text);
-    globalEditor.setCode(proc_text_replaced)
-}
-
-export function ProcessText(match, ...args) {
-
-    let replace = ""
-    //if (document.getElementById('flexRadioDefault2').checked) {
-      //  replace = "_"
-    //}
-
-    return replace
-}
-
-export default function StrudelDemo() {
-
-    document.addEventListener('keydown', function (event) { //Press space to start/stop
-        if (event.code === 'Space') {
-            event.preventDefault();
-            if (globalEditor != null) {
-   
-                    globalEditor.evaluate();
+        return () => {
+            // best-effort cleanup if StrudelMirror exposes a destroy API; otherwise null the ref
+            try {
+                if (instanceRef.current && typeof instanceRef.current.destroy === 'function') {
+                    instanceRef.current.destroy();
                 }
+            } catch (err) {
+                //ignore
             }
-        }
+            instanceRef.current = null;
+        };
+    }, [canvasRef, editorRootRef, defaultCode]);
+
+    return useMemo(() => ({
+        setCode,
+        evaluate,
+        stop,
+        get instance() { return instanceRef.current; },
+    }), [setCode, evaluate, stop]);
+}
+
+//Small UI subcomponents that can be moved to /components later maybe
+function EditorPane({ editorRootRef }) {
+    return (
+        <div id="editor" ref={editorRootRef} style={{ borderRadius: 8, boxShadow: '0 2px 8px rgba(55,48,163,0.04)', marginBottom: 12, background: '#f3f4f6' }} />
     );
+}
 
+function OutputPane() {
+    return <div id="output" style={{ borderRadius: 8, background: '#f3f4f6', minHeight: 40, marginBottom: 12 }} />;
+}
 
-    
+export default function StrudelDemoRefactor() {
+    //local refs instead of global variables
+    const editorRootRef = useRef(null);
+    const canvasRef = useRef(null);
 
-    const [layers, setLayers] = useState([ //This is just sample data
-        { name: 'Piano', notes: ['C', 'D', 'E', 'F', 'G'] },
-        { name: 'Drums', notes: ['Kick', 'Snare', 'Hat'] },
-        { name: 'Bass', notes: ['C1', 'D1', 'E1', 'F1'] },
-    ])
-
-    const hasRun = useRef(false);
-
-    const [procText, setProcText] = useState(stranger_tune)
-
+    //UI state
+    const [procText, setProcText] = useState(stranger_tune);
     const [volume, setVolume] = useState(1);
+    const [cpm, setCpm] = useState(140);
+    const [lpf, setLpf] = useState(5);
+    const [playingState, setPlayingState] = useState('stop');
 
-    const [cpm, setCpm] = useState(140); 
-
-    const [state, setState] = useState("stop");
-
-    const [lpf, setLpf] = useState(1000); 
-
-
-    const handlePlay = () => {
-        let outputText = Preprocess({ inputText: procText, volume: volume, cpm: cpm, lpf: lpf })
-        globalEditor.setCode(outputText)
-        globalEditor.evaluate();
-    }
-    const handleStop = () => {
-        globalEditor.stop();
-    }
-
-
-    
-
+    //init console monkey patch and d3 event listener once
     useEffect(() => {
-        if (state === "play") {
-            handlePlay();
-        }
-    }, [volume, cpm, lpf])
+        console_monkey_patch();
+        const handleD3Data = (e) => console.log('d3Data', e.detail);
+        document.addEventListener('d3Data', handleD3Data);
+        return () => document.removeEventListener('d3Data', handleD3Data);
+    }, []);
 
+    //instantiate Strudel editor with hook
+    const editor = useStrudelEditor({ editorRootRef, canvasRef, defaultCode: procText });
+
+    //keyboard space toggle (useEffect with clean up)
     useEffect(() => {
+        const onKeyDown = (ev) => {
+            if (ev.code === 'Space') {
+                ev.preventDefault();
+                //toggle evaluate
+                if (editor.instance) editor.instance.evaluate();
+            }
+        };
+        document.addEventListener('keydown', onKeyDown);
+        return () => document.removeEventListener('keydown', onKeyDown);
+    }, [editor]);
 
-        if (!hasRun.current) {
-            document.addEventListener("d3Data", handleD3Data);
-            console_monkey_patch();
-            hasRun.current = true;
-            //Code copied from example: https://codeberg.org/uzu/strudel/src/branch/main/examples/codemirror-repl
-            //init canvas
+    //derived output from preprocess
+    const buildPreprocessed = useCallback(() => {
+        return Preprocess({ inputText: procText, volume, cpm, lpf });
+    }, [procText, volume, cpm, lpf]);
 
-            const canvas = document.getElementById('roll');
-            canvas.width = canvas.width * 2;
-            canvas.height = canvas.height * 2;
-            const drawContext = canvas.getContext('2d');
-            const drawTime = [-2, 2]; // time window of drawn haps
-            globalEditor = new StrudelMirror({
-                defaultOutput: webaudioOutput,
-                getTime: () => getAudioContext().currentTime,
-                transpiler,
-                root: document.getElementById('editor'),
-                drawTime,
-                onDraw: (haps, time) => drawPianoroll({ haps, time, ctx: drawContext, drawTime, fold: 0 }),
-                prebake: async () => {
-                    initAudioOnFirstClick(); // needed to make the browser happy (don't await this here..)
-                    const loadModules = evalScope(
-                        import('@strudel/core'),
-                        import('@strudel/draw'),
-                        import('@strudel/mini'),
-                        import('@strudel/tonal'),
-                        import('@strudel/webaudio'),
-                    );
-                    await Promise.all([loadModules, registerSynthSounds(), registerSoundfonts()]);
-                },
-            });
-            document.getElementById('proc').value = stranger_tune
+    const handlePlay = useCallback(() => {
+        const outputText = buildPreprocessed();
+        editor.setCode(outputText);
+        editor.evaluate();
+        setPlayingState('play');
+    }, [editor, buildPreprocessed]);
 
-            //SetupButtons()
-            //Proc()
-        }
-        globalEditor.setCode(procText);
-    }, [procText]);
+    const handleStop = useCallback(() => {
+        editor.stop();
+        setPlayingState('stop');
+    }, [editor]);
 
+    const handleProcOnly = useCallback(() => {
+        //set code but don't auto-play
+        const output = buildPreprocessed();
+        editor.setCode(output);
+    }, [editor, buildPreprocessed]);
+
+    //react to changes that should rerun while playing
+    useEffect(() => {
+        if (playingState === 'play') handlePlay();
+        //only want to rerun when one of these three change
+    }, [volume, cpm, lpf]);
 
     return (
-        <div style={{ background: 'linear-gradient(135deg, #ce7e00 0%, #f1c232 100%)', minHeight: '100vh', padding: '32px' }}>
-            <h1 style={{ textAlign: 'center', marginBottom: '24px', fontWeight: 900, letterSpacing: '1px', color: '#3730a3' }}>Strudel</h1>
+        <div style={{ background: 'linear-gradient(135deg, #ce7e00 0%, #f1c232 100%)', minHeight: '100vh', padding: 32 }}>
+            <h1 style={{ textAlign: 'center', marginBottom: 24, fontWeight: 900, letterSpacing: '1px', color: '#3730a3' }}>Strudel</h1>
+
             <main>
-                <div className="container-fluid" style={{ borderRadius: '16px', boxShadow: '0 4px 24px rgba(55,48,163,0.08)', background: '#b45f06', padding: '24px' }}>
-                    <div className="row" style={{ marginBottom: '16px' }}>
-                        <div className="col-md-8" style={{ maxHeight: '50vh', overflowY: 'auto', paddingRight: '16px' }}>
+                <div className="container-fluid" style={{ borderRadius: 16, boxShadow: '0 4px 24px rgba(55,48,163,0.08)', background: '#b45f06', padding: 24 }}>
+                    <div className="row" style={{ marginBottom: 16 }}>
+                        <div className="col-md-8" style={{ maxHeight: '50vh', overflowY: 'auto', paddingRight: 16 }}>
                             <PreprocessArea defaultValue={procText} onChange={(e) => setProcText(e.target.value)} />
                         </div>
+
                         <div className="col-md-4" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
                             <nav style={{ width: '100%' }}>
-                                <ProcButtons onProc={() => { }}
-                                    onProcPlay={() => { setState("play"); handlePlay() }} />
+                                <PlayButtons onPlay={() => { setPlayingState('play'); handlePlay(); }} onStop={handleStop} />
+                                
+
                                 <br />
-                                <PlayButtons onPlay={() => { setState("play"); handlePlay() }} onStop={() => { setState("stop"); handleStop(); }} />
+                                {/* <ProcButtons onProc={handleProcOnly} onProcPlay={() => { handleProcOnly(); handlePlay(); }} />   */}
                             </nav>
-                            <Midipad />
-                            <h1>Music Sequence</h1>
-                           
-                            {/* <NotesDisplay layers={layers} /> */}
                         </div>
                     </div>
+
                     <div className="row">
-                        <div className="col-md-8" style={{ maxHeight: '50vh', overflowY: 'auto', paddingRight: '16px' }}>
-                            <div id="editor" style={{ borderRadius: '8px', boxShadow: '0 2px 8px rgba(55,48,163,0.04)', marginBottom: '12px', background: '#f3f4f6' }} />
-                            <div id="output" style={{ borderRadius: '8px', background: '#f3f4f6', minHeight: '40px', marginBottom: '12px' }} />
+                        <div className="col-md-8" style={{ maxHeight: '50vh', overflowY: 'auto', paddingRight: 16 }}>
+                            <EditorPane editorRootRef={editorRootRef} />
+                            <OutputPane />
                         </div>
+
                         <div className="col-md-4" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                             <DJControls
                                 volume={volume}
@@ -199,13 +203,13 @@ export default function StrudelDemo() {
                                 onCpmChange={(e) => setCpm(Number(e.target.value))}
                                 lpf={lpf}
                                 onLpfChange={(e) => setLpf(Number(e.target.value))}
-                                
                             />
                         </div>
                     </div>
                 </div>
-                <canvas id="roll" style={{ display: 'block', margin: '32px auto 0', borderRadius: '12px', boxShadow: '0 2px 12px rgba(55,48,163,0.08)', background: '#00000', width: '100%', maxWidth: '900px', height: '200px' }}></canvas>
-            </main >
-        </div >
+
+                <canvas id="roll" ref={canvasRef} style={{ display: 'block', margin: '32px auto 0', borderRadius: 12, boxShadow: '0 2px 12px rgba(55,48,163,0.08)', background: '#00000', width: '100%', maxWidth: 900, height: 200 }} />
+            </main>
+        </div>
     );
 }
