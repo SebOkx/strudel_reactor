@@ -10,7 +10,6 @@ import { stranger_tune } from './music/stranger_things_song';
 import console_monkey_patch, { getD3Data } from './console-monkey-patch';
 import DJControls from './components/DJControls';
 import PlayButtons from './components/PlayButtons';
-import ProcButtons from './components/ProcButtons';
 import PreprocessArea from './components/PreprocessArea';
 import { Preprocess } from './utils/PreprocessLogic';
 import LoadSave from './components/LoadSave';

@@ -1,6 +1,3 @@
-AT THE TIME OF EDITING THIS FINAL README, GITHUB IS DOWN BOTH PREVENTING ME FROM SAFELY MAKING CHANGES TO UI (wanted to component-ise a few more things) AND FROM ACTUALLY USING THE APPLICATION
-SINCE THE SONGS ARE DEPENDENT ON GIT SAMPLES TO PLAY - 19/11/2025.
-
 Play - begins the audio. Audio continues to play until stop is pressed. Audio can also be started with space key. 
 Stop - stops the audio. 
 Load song - loads the json or text file selected from files by user. 

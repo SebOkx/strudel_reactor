@@ -7,6 +7,10 @@
       "RelativeMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|solutionrelative:src\\app.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|c:\\users\\asus\\desktop\\uni_files\\web technology\\strudelapp\\strudel_reactor\\src\\components\\d3graph.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|solutionrelative:src\\components\\d3graph.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|c:\\users\\asus\\desktop\\uni_files\\web technology\\strudelapp\\strudel_reactor\\src\\music\\bass_fuge.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|solutionrelative:src\\music\\bass_fuge.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
@@ -29,10 +33,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|c:\\users\\asus\\desktop\\uni_files\\web technology\\strudelapp\\strudel_reactor\\src\\components\\loadsave.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|solutionrelative:src\\components\\loadsave.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|c:\\users\\asus\\desktop\\uni_files\\web technology\\strudelapp\\strudel_reactor\\src\\components\\d3graph.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|solutionrelative:src\\components\\d3graph.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|c:\\users\\asus\\desktop\\uni_files\\web technology\\strudelapp\\strudel_reactor\\src\\components\\preprocessarea.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
@@ -83,7 +83,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "LoadSave.jsx",
               "DocumentMoniker": "C:\\Users\\asus\\Desktop\\UNI_FILES\\Web Technology\\StrudelApp\\strudel_reactor\\src\\components\\LoadSave.jsx",
               "RelativeDocumentMoniker": "src\\components\\LoadSave.jsx",
@@ -96,7 +96,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "DJControls.jsx",
               "DocumentMoniker": "C:\\Users\\asus\\Desktop\\UNI_FILES\\Web Technology\\StrudelApp\\strudel_reactor\\src\\components\\DJControls.jsx",
               "RelativeDocumentMoniker": "src\\components\\DJControls.jsx",
@@ -109,7 +109,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "README.md",
               "DocumentMoniker": "C:\\Users\\asus\\Desktop\\UNI_FILES\\Web Technology\\StrudelApp\\strudel_reactor\\README.md",
               "RelativeDocumentMoniker": "README.md",
@@ -122,7 +122,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "Dinosong.js",
               "DocumentMoniker": "C:\\Users\\asus\\Desktop\\UNI_FILES\\Web Technology\\StrudelApp\\strudel_reactor\\src\\music\\Dinosong.js",
               "RelativeDocumentMoniker": "src\\music\\Dinosong.js",
@@ -135,7 +135,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Bass_Fuge.js",
               "DocumentMoniker": "C:\\Users\\asus\\Desktop\\UNI_FILES\\Web Technology\\StrudelApp\\strudel_reactor\\src\\music\\Bass_Fuge.js",
               "RelativeDocumentMoniker": "src\\music\\Bass_Fuge.js",
@@ -161,13 +161,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 1,
               "Title": "D3Graph.jsx",
               "DocumentMoniker": "C:\\Users\\asus\\Desktop\\UNI_FILES\\Web Technology\\StrudelApp\\strudel_reactor\\src\\components\\D3Graph.jsx",
               "RelativeDocumentMoniker": "src\\components\\D3Graph.jsx",
               "ToolTip": "C:\\Users\\asus\\Desktop\\UNI_FILES\\Web Technology\\StrudelApp\\strudel_reactor\\src\\components\\D3Graph.jsx",
               "RelativeToolTip": "src\\components\\D3Graph.jsx",
-              "ViewState": "AgIAADsAAAAAAAAAAAAQwEcAAAAHAAAAAAAAAA==",
+              "ViewState": "AgIAADEAAAAAAAAAAAAwwEsAAAALAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
               "WhenOpened": "2025-11-18T11:22:05.905Z",
               "EditorCaption": ""
@@ -180,14 +180,14 @@
               "RelativeDocumentMoniker": "src\\App.js",
               "ToolTip": "C:\\Users\\asus\\Desktop\\UNI_FILES\\Web Technology\\StrudelApp\\strudel_reactor\\src\\App.js",
               "RelativeToolTip": "src\\App.js",
-              "ViewState": "AgIAAC4BAAAAAAAAAAAwwEEBAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
               "WhenOpened": "2025-11-02T15:32:50.585Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "stranger_things_song.js",
               "DocumentMoniker": "C:\\Users\\asus\\Desktop\\UNI_FILES\\Web Technology\\StrudelApp\\strudel_reactor\\src\\music\\stranger_things_song.js",
               "RelativeDocumentMoniker": "src\\music\\stranger_things_song.js",
