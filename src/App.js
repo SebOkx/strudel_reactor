@@ -15,7 +15,7 @@ import PreprocessArea from './components/PreprocessArea';
 import { Preprocess } from './utils/PreprocessLogic';
 import LoadSave from './components/LoadSave';
 import loadSamples from './components/LoadSamples';
-
+import D3Graph from "./components/D3Graph";
 
 
 
@@ -178,25 +178,24 @@ export default function StrudelDemo() {
             document.getElementById('proc').value = stranger_tune;
         }
 
-        //set the editor to the new procText
         globalEditor.setCode(procText);
 
+        //keep the textarea in sync
+        const procEl = document.getElementById('proc');
+        if (procEl && procEl.value !== procText) procEl.value = procText;
+
         const meta = extractMetadataFromSong(procText);
-        if (meta.cpm !== undefined) {
-            //only update if different to avoid unnecessary renders
-            setCpm(prev => (prev === meta.cpm ? prev : meta.cpm));
-        }
-        if (meta.lpf !== undefined) {
-            setLpf(prev => (prev === meta.lpf ? prev : meta.lpf));
-        }
-        // -----------------------
+        if (meta.cpm !== undefined) setCpm(prev => (prev === meta.cpm ? prev : meta.cpm));
+        if (meta.lpf !== undefined) setLpf(prev => (prev === meta.lpf ? prev : meta.lpf));
     }, [procText]);
 
 
     return (
         <div style={{ background: 'linear-gradient(135deg, #ce7e00 0%, #f1c232 100%)', minHeight: '100vh', padding: '32px' }}>
             <h1 style={{ textAlign: 'center', marginBottom: '24px', fontWeight: 900, letterSpacing: '1px', color: '#3730a3' }}>Strudel</h1>
-            <LoadSave />
+            // in App.js (inside return)
+            <LoadSave onLoad={(text) => setProcText(text)} />
+
             <main>
                 <div className="container-fluid"
                     style={{
@@ -208,9 +207,10 @@ export default function StrudelDemo() {
                     <div className="row" style={{ marginBottom: '16px' }}>
                         <div className="col-md-8" style={{ maxHeight: '50vh', overflowY: 'auto', paddingRight: '16px' }}>
                             <PreprocessArea
-                                defaultValue={procText}
+                                value={procText}
                                 onChange={(e) => setProcText(e.target.value)}
                             />
+
                         </div>
 
                         <div className="col-md-4"

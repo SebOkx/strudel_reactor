@@ -1,11 +1,10 @@
 import React, { useRef } from 'react';
 
-export default function LoadSave() {
+export default function LoadSave({ onLoad }) {
     const fileInputRef = useRef(null);
 
-    //Load handler -----------------
     const handleLoadClick = () => {
-        fileInputRef.current.click(); //open file picker
+        fileInputRef.current.click();
     };
 
     const handleFileChange = (event) => {
@@ -18,21 +17,24 @@ export default function LoadSave() {
         const reader = new FileReader();
         reader.onload = (e) => {
             const result = e.target.result;
-            const procElement = document.getElementById("proc");
 
-            if (procElement) {
-                procElement.value = result;
-            } else {
-                console.error("Element not found.");
+            //keep the DOM textarea in sync
+            const procElement = document.getElementById("proc");
+            if (procElement) procElement.value = result;
+
+            //update react state in the parent
+            if (typeof onLoad === 'function') {
+                onLoad(result);
             }
         };
         reader.readAsText(files[0]);
+
+        //allow same file to be selected later
+        event.target.value = '';
     };
 
-    //Save handler -------------------
     const handleSaveClick = () => {
         const procElement = document.getElementById("proc");
-
         if (!procElement) {
             console.error("Element not found");
             return;
@@ -60,7 +62,6 @@ export default function LoadSave() {
             <button onClick={handleLoadClick} className="btn btn-dark btn-lg">Load Song</button>
             <button onClick={handleSaveClick} className="btn btn-dark btn-lg">Save Song</button>
 
-            {/*powers the file chooser */}
             <input
                 type="file"
                 accept=".txt,.json"
@@ -71,3 +72,4 @@ export default function LoadSave() {
         </div>
     );
 }
+
