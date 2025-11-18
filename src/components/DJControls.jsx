@@ -9,7 +9,7 @@ function DJControls({ volume, onVolumeChange, cpm, onCpmChange, lpf, onLpfChange
             </div>
 
             {/* Volume Slider */}
-
+            
             <label htmlFor="volumeRange" className="form-label">Volume</label>
             <input type="range" className="form-range" min="0" max="2" step="0.1" value={volume} onChange={onVolumeChange} id="volume_range" />
 

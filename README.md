@@ -1,3 +1,17 @@
+Play - begins the audio. Audio continues to play
+A link to your demonstration video.
+Any bonus points you’d like to claim, as well as required evidence (See the GIGA HD guidelines in the
+Music and Video sections).
+Any song code you’ve used from the Strudel.cc bakery (or any other source).
+What AI tools you used, and your inputs and outputs (See AI usage guidelines).
+
+
+
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

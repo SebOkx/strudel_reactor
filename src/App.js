@@ -265,6 +265,14 @@ export default function StrudelDemo() {
                                     onPlay={() => { setState("play"); handlePlay(); }}
                                     onStop={() => { setState("stop"); handleStop(); }}
                                 />
+                                <DJControls
+                                    volume={volume}
+                                    onVolumeChange={(e) => setVolume(Number(e.target.value))}
+                                    cpm={cpm}
+                                    onCpmChange={(e) => setCpm(Number(e.target.value))}
+                                    lpf={lpf}
+                                    onLpfChange={(e) => setLpf(Number(e.target.value))}
+                                />
                             </nav>
                         </div>
                     </div>
@@ -290,17 +298,7 @@ export default function StrudelDemo() {
                             />
                         </div>
 
-                        <div className="col-md-4"
-                            style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            <DJControls
-                                volume={volume}
-                                onVolumeChange={(e) => setVolume(Number(e.target.value))}
-                                cpm={cpm}
-                                onCpmChange={(e) => setCpm(Number(e.target.value))}
-                                lpf={lpf}
-                                onLpfChange={(e) => setLpf(Number(e.target.value))}
-                            />
-                        </div>
+                        
                     </div>
                 </div>
 
