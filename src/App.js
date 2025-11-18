@@ -14,15 +14,14 @@ import ProcButtons from './components/ProcButtons';
 import PreprocessArea from './components/PreprocessArea';
 import { Preprocess } from './utils/PreprocessLogic';
 import LoadSave from './components/LoadSave';
-import loadSamples from './components/LoadSamples';
+
 import D3Graph from "./components/D3Graph";
-
-
 
 let globalEditor = null;
 
 const handleD3Data = (event) => {
     console.log(event.detail);
+
 };
 
 export function SetupButtons() {
@@ -38,6 +37,7 @@ export function SetupButtons() {
         }
     });
 }
+
 
 export function ProcAndPlay() {
     if (globalEditor != null && globalEditor.repl.state.started == true) {
@@ -130,12 +130,37 @@ export default function StrudelDemo() {
     };
 
     useEffect(() => {
-        if (state === "play") {
-            handlePlay();
-        }
-    }, [volume, cpm, lpf]);
+        const scope = evalScope({
+            onEvent: (ev) => {
+                // show the entire event object in the console in an inspectable form
+                console.log("%c[hap] STRUDEL EVENT:", "color: purple; font-weight: bold", ev);
+
+                // show a JSON snapshot (useful if console shows proxies)
+                try { console.log("JSON:", JSON.stringify(ev, null, 2)); } catch (e) { /* circular -> ignore */ }
+
+               
+            }
+        });
+
+        return () => {
+            // if Strudel exports a dispose/stop for scope, call it here.
+            if (scope && scope.dispose) scope.dispose();
+        };
+    }, []);
+
 
     useEffect(() => {
+
+
+        if (state === "play") {
+            handlePlay();
+
+        }
+    }, [volume, cpm, lpf]);
+    const [d3Data, setD3Data] = useState([]);
+
+    useEffect(() => {
+
         if (!hasRun.current) {
             document.addEventListener("d3Data", handleD3Data);
             console_monkey_patch();
@@ -155,12 +180,22 @@ export default function StrudelDemo() {
                 transpiler,
                 root: document.getElementById('editor'),
                 drawTime,
-                onDraw: (haps, time) => drawPianoroll({
-                    haps, time, ctx: drawContext, drawTime, fold: 0
-                }),
+                onDraw: (haps, time) => {
+                    
+                    const values = haps.map(h => (h.gain || 0) * (h.pitch || 1));
+
+                    setD3Data(values); //updates D3 graph
+
+                    //still draw the existing pianoroll
+                    drawPianoroll({
+                        haps, time, ctx: drawContext, drawTime, fold: 0
+                    });
+                }
+,
                 prebake: async () => {
                     initAudioOnFirstClick();
                     const loadModules = evalScope(
+
                         import('@strudel/core'),
                         import('@strudel/draw'),
                         import('@strudel/mini'),
@@ -193,7 +228,12 @@ export default function StrudelDemo() {
     return (
         <div style={{ background: 'linear-gradient(135deg, #ce7e00 0%, #f1c232 100%)', minHeight: '100vh', padding: '32px' }}>
             <h1 style={{ textAlign: 'center', marginBottom: '24px', fontWeight: 900, letterSpacing: '1px', color: '#3730a3' }}>Strudel</h1>
-            // in App.js (inside return)
+            <div style={{ marginTop: '32px', textAlign: 'center' }}>
+                
+                <D3Graph data={d3Data} />
+
+            </div>
+
             <LoadSave onLoad={(text) => setProcText(text)} />
 
             <main>
@@ -216,10 +256,10 @@ export default function StrudelDemo() {
                         <div className="col-md-4"
                             style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
                             <nav style={{ width: '100%' }}>
-                                <ProcButtons
-                                    onProc={() => { }}
-                                    onProcPlay={() => { setState("play"); handlePlay(); }}
-                                />
+                                {/*<ProcButtons*/}
+                                {/*    onProc={() => { }}*/}
+                                {/*    onProcPlay={() => { setState("play"); handlePlay(); }}*/}
+                                {/*/>*/}
                                 <br />
                                 <PlayButtons
                                     onPlay={() => { setState("play"); handlePlay(); }}
