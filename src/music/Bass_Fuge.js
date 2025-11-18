@@ -28,5 +28,5 @@ x=>x.add(7)
 .clip(1)
 .stack(s("bd:1*2,~ sd:0,[~ hh:0]*2"))
 .pianoroll({vertical:1})
-
+.gain(0.6)
 `

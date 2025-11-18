@@ -1,9 +1,24 @@
-Play - begins the audio. Audio continues to play
-A link to your demonstration video.
-Any bonus points you’d like to claim, as well as required evidence (See the GIGA HD guidelines in the
-Music and Video sections).
-Any song code you’ve used from the Strudel.cc bakery (or any other source).
-What AI tools you used, and your inputs and outputs (See AI usage guidelines).
+AT THE TIME OF EDITING THIS FINAL README, GITHUB IS DOWN BOTH PREVENTING ME FROM SAFELY MAKING CHANGES TO UI (wanted to component-ise a few more things) AND FROM ACTUALLY USING THE APPLICATION
+SINCE THE SONGS ARE DEPENDENT ON GIT SAMPLES TO PLAY - 19/11/2025.
+
+Play - begins the audio. Audio continues to play until stop is pressed. Audio can also be started with space key. 
+Stop - stops the audio. 
+Load song - loads the json or text file selected from files by user. 
+Save - downloads the song as a txt. by default. 
+CPM - alters the cycles per minute. Some songs by default do not hav CPM set up and default it at 1, hence why this can be typed into as well as using quasi-slider.
+Volume - controls volume via gain, does not work on songs unless they have it innate (means some require fixing before being manupulated)
+LPF - low-pass filter, very cool feature to influence song however same caveat as above where dependent on fed song to have an LPF value. 
+
+Songs used:
+// "Dinofunk
+// @license CC BY-NC-SA 4.0 https://creativecommons.org/licenses/by-nc-sa/4.0/
+// @by Felix Roos
+
+// "Bass fuge"
+// @license CC BY-NC-SA 4.0 https://creativecommons.org/licenses/by-nc-sa/4.0/
+// @by Felix Roos
+
+
 
 
 
